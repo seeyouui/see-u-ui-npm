@@ -1,7 +1,7 @@
 {
   "name": "see-u-ui",
-  "version": "0.1.605",
-  "description": "test",
+  "version": "1.0.001",
+  "description": "SeeYouUI，是全面兼容nvue的uni-app生态框架",
   "license": "MIT",
   "author": "GmhLovEDM",
   "type": "commonjs",
