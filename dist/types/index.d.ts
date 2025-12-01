@@ -1,4 +1,4 @@
-import SeeButton from "./components/see-button/index";
+import { SeeButton } from "./components/see-button/index";
 export { SeeButton };
 declare const _default: {
     SeeButton: {
