@@ -5,18 +5,15 @@
   "license": "MIT",
   "author": "GmhLovEDM",
   "type": "commonjs",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
+  "main": "index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "build": "vite build"
+    "build": "vue-tsc --declaration --emitDeclarationOnly --outDir dist/types"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "@vitejs/plugin-vue": "^5.0.0",
-    "vite-plugin-dts": "^3.8.0",
     "typescript": "^5.9.3",
     "vue": "3",
+    "vue-tsc": "^3.1.5",
     "@dcloudio/types": "^3.4.28"
   }
 }

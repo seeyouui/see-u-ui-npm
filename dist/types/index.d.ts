@@ -1,78 +1,29 @@
-import { default as SeeButton } from './components/see-button/index';
-
+import SeeButton from "./components/see-button/index";
 export { SeeButton };
 declare const _default: {
     SeeButton: {
-        new (...args: any[]): import('vue').CreateComponentPublicInstanceWithMixins<Readonly<import('vue').ExtractPropTypes<{
-            title: {
-                type: import('vue').PropType<string>;
-                default: string;
-            };
-            size: {
-                type: import('vue').PropType<"normal" | "large" | "small" | "mini">;
-                default: string;
-            };
-            type: {
-                type: import('vue').PropType<"info" | "primary" | "error" | "warning" | "success">;
-                default: string;
-            };
-            color: {
-                type: import('vue').PropType<string>;
-                default: string;
-            };
-            textColor: {
-                type: import('vue').PropType<string>;
-                default: string;
-            };
-            isRipple: {
-                type: import('vue').PropType<boolean>;
-                default: boolean;
-            };
-            rippleTime: {
-                type: import('vue').PropType<number>;
-                default: number;
-            };
-            maskTime: {
-                type: import('vue').PropType<number>;
-                default: number;
-            };
-            isHollow: {
-                type: import('vue').PropType<boolean>;
-                default: boolean;
-            };
-            rippleColor: {
-                type: import('vue').PropType<string>;
-                default: string;
-            };
-            rippleStyle: {
-                type: import('vue').PropType<Record<string, any>>;
-                default: any;
-            };
-            customStyle: {
-                type: import('vue').PropType<Record<string, any>>;
-                default: any;
-            };
-            hoverClass: {
-                type: import('vue').PropType<string>;
-                default: string;
-            };
-            border: {
-                type: import('vue').PropType<0 | 1>;
-                default: number;
-            };
-            isDisabled: {
-                type: import('vue').PropType<boolean>;
-                default: boolean;
-            };
-            radius: {
-                type: import('vue').PropType<number>;
-                default: number;
-            };
-        }>> & Readonly<{
+        new (...args: any[]): import("vue").CreateComponentPublicInstanceWithMixins<Readonly<{
+            title?: string;
+            size?: "normal" | "large" | "small" | "mini";
+            type?: "info" | "primary" | "error" | "warning" | "success";
+            color?: string;
+            textColor?: string;
+            isRipple?: boolean;
+            rippleTime?: number;
+            maskTime?: number;
+            isHollow?: boolean;
+            rippleColor?: string;
+            rippleStyle?: Record<string, any> | null;
+            customStyle?: Record<string, any> | null;
+            hoverClass?: string | null;
+            border?: 1 | 0;
+            isDisabled?: boolean;
+            radius?: number;
+        }> & Readonly<{
             onOnTap?: () => any;
-        }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
-            onTap: () => void;
-        }, import('vue').PublicProps, {
+        }>, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {} & {
+            onTap: () => any;
+        }, import("vue").PublicProps, {
             title: string;
             size: "normal" | "large" | "small" | "mini";
             type: "info" | "primary" | "error" | "warning" | "success";
@@ -89,79 +40,31 @@ declare const _default: {
             border: 1 | 0;
             isDisabled: boolean;
             radius: number;
-        }, true, {}, {}, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, {}, any, import('vue').ComponentProvideOptions, {
+        }, true, {}, {}, import("vue").GlobalComponents, import("vue").GlobalDirectives, string, {}, any, import("vue").ComponentProvideOptions, {
             P: {};
             B: {};
             D: {};
             C: {};
             M: {};
             Defaults: {};
-        }, Readonly<import('vue').ExtractPropTypes<{
-            title: {
-                type: import('vue').PropType<string>;
-                default: string;
-            };
-            size: {
-                type: import('vue').PropType<"normal" | "large" | "small" | "mini">;
-                default: string;
-            };
-            type: {
-                type: import('vue').PropType<"info" | "primary" | "error" | "warning" | "success">;
-                default: string;
-            };
-            color: {
-                type: import('vue').PropType<string>;
-                default: string;
-            };
-            textColor: {
-                type: import('vue').PropType<string>;
-                default: string;
-            };
-            isRipple: {
-                type: import('vue').PropType<boolean>;
-                default: boolean;
-            };
-            rippleTime: {
-                type: import('vue').PropType<number>;
-                default: number;
-            };
-            maskTime: {
-                type: import('vue').PropType<number>;
-                default: number;
-            };
-            isHollow: {
-                type: import('vue').PropType<boolean>;
-                default: boolean;
-            };
-            rippleColor: {
-                type: import('vue').PropType<string>;
-                default: string;
-            };
-            rippleStyle: {
-                type: import('vue').PropType<Record<string, any>>;
-                default: any;
-            };
-            customStyle: {
-                type: import('vue').PropType<Record<string, any>>;
-                default: any;
-            };
-            hoverClass: {
-                type: import('vue').PropType<string>;
-                default: string;
-            };
-            border: {
-                type: import('vue').PropType<0 | 1>;
-                default: number;
-            };
-            isDisabled: {
-                type: import('vue').PropType<boolean>;
-                default: boolean;
-            };
-            radius: {
-                type: import('vue').PropType<number>;
-                default: number;
-            };
-        }>> & Readonly<{
+        }, Readonly<{
+            title?: string;
+            size?: "normal" | "large" | "small" | "mini";
+            type?: "info" | "primary" | "error" | "warning" | "success";
+            color?: string;
+            textColor?: string;
+            isRipple?: boolean;
+            rippleTime?: number;
+            maskTime?: number;
+            isHollow?: boolean;
+            rippleColor?: string;
+            rippleStyle?: Record<string, any> | null;
+            customStyle?: Record<string, any> | null;
+            hoverClass?: string | null;
+            border?: 1 | 0;
+            isDisabled?: boolean;
+            radius?: number;
+        }> & Readonly<{
             onOnTap?: () => any;
         }>, {}, {}, {}, {}, {
             title: string;
@@ -184,75 +87,27 @@ declare const _default: {
         __isFragment?: never;
         __isTeleport?: never;
         __isSuspense?: never;
-    } & import('vue').ComponentOptionsBase<Readonly<import('vue').ExtractPropTypes<{
-        title: {
-            type: import('vue').PropType<string>;
-            default: string;
-        };
-        size: {
-            type: import('vue').PropType<"normal" | "large" | "small" | "mini">;
-            default: string;
-        };
-        type: {
-            type: import('vue').PropType<"info" | "primary" | "error" | "warning" | "success">;
-            default: string;
-        };
-        color: {
-            type: import('vue').PropType<string>;
-            default: string;
-        };
-        textColor: {
-            type: import('vue').PropType<string>;
-            default: string;
-        };
-        isRipple: {
-            type: import('vue').PropType<boolean>;
-            default: boolean;
-        };
-        rippleTime: {
-            type: import('vue').PropType<number>;
-            default: number;
-        };
-        maskTime: {
-            type: import('vue').PropType<number>;
-            default: number;
-        };
-        isHollow: {
-            type: import('vue').PropType<boolean>;
-            default: boolean;
-        };
-        rippleColor: {
-            type: import('vue').PropType<string>;
-            default: string;
-        };
-        rippleStyle: {
-            type: import('vue').PropType<Record<string, any>>;
-            default: any;
-        };
-        customStyle: {
-            type: import('vue').PropType<Record<string, any>>;
-            default: any;
-        };
-        hoverClass: {
-            type: import('vue').PropType<string>;
-            default: string;
-        };
-        border: {
-            type: import('vue').PropType<0 | 1>;
-            default: number;
-        };
-        isDisabled: {
-            type: import('vue').PropType<boolean>;
-            default: boolean;
-        };
-        radius: {
-            type: import('vue').PropType<number>;
-            default: number;
-        };
-    }>> & Readonly<{
+    } & import("vue").ComponentOptionsBase<Readonly<{
+        title?: string;
+        size?: "normal" | "large" | "small" | "mini";
+        type?: "info" | "primary" | "error" | "warning" | "success";
+        color?: string;
+        textColor?: string;
+        isRipple?: boolean;
+        rippleTime?: number;
+        maskTime?: number;
+        isHollow?: boolean;
+        rippleColor?: string;
+        rippleStyle?: Record<string, any> | null;
+        customStyle?: Record<string, any> | null;
+        hoverClass?: string | null;
+        border?: 1 | 0;
+        isDisabled?: boolean;
+        radius?: number;
+    }> & Readonly<{
         onOnTap?: () => any;
-    }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
-        onTap: () => void;
+    }>, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {} & {
+        onTap: () => any;
     }, string, {
         title: string;
         size: "normal" | "large" | "small" | "mini";
@@ -270,9 +125,9 @@ declare const _default: {
         border: 1 | 0;
         isDisabled: boolean;
         radius: number;
-    }, {}, string, {}, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, import('vue').ComponentProvideOptions> & import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps & (new () => {
+    }, {}, string, {}, import("vue").GlobalComponents, import("vue").GlobalDirectives, string, import("vue").ComponentProvideOptions> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & (new () => {
         $slots: {
-            default?(_: {}): any;
+            default?: (props: {}) => any;
         };
     });
 };
