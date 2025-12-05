@@ -61,6 +61,11 @@
   <!-- #endif -->
 </template>
 
+<script lang="ts">
+export default {
+  name: "SeeButton",
+};
+</script>
 <script lang="ts" setup>
 /**
  * Button 按钮
@@ -83,7 +88,7 @@
  * @property {Boolean}												isDisabled		是否禁用状态
  * @property {Number}												radius			圆角（默认4px）
  *
- * @example <SeeButton title="主要按钮" type="primary" isRipple />
+ * @example
  */
 import { ref, computed, nextTick, getCurrentInstance } from "vue";
 import type { TouchEvent, ClientRectData, RippleItem } from "./type";
