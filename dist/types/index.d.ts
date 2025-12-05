@@ -1,8 +1,16 @@
 import { SeeButton } from './components/SeeButton/index';
 import { SeeText } from './components/SeeText/index';
 import { SeeLink } from './components/SeeLink/index';
+import * as hooks from "./utils/hooks/index";
 export { SeeButton, SeeText, SeeLink };
+export * from './utils/hooks/index';
 declare const _default: {
+    formatCurrency(value: number | string, options?: hooks.CurrencyOptions): string;
+    useCurrencyFormat(amount: import('vue').MaybeRef<string | number> | import('vue').ComputedRef<string | number> | (() => string | number), options?: hooks.CurrencyOptions): import('vue').ComputedRef<string>;
+    formatDate(date: string | number | Date, fmt?: string, options?: hooks.DateFormatOptions): string;
+    useDateFormat(date: import('vue').MaybeRef<string | number | Date>, formatStr?: import('vue').MaybeRef<string>, options?: hooks.DateFormatOptions): import('vue').ComputedRef<string>;
+    formatTimeAgo(date: string | number | Date): string;
+    useTimeAgo(date: import('vue').MaybeRef<string | number | Date>, updateInterval?: number): import('vue').ComputedRef<string>;
     SeeButton: {
         new (...args: any[]): import('vue').CreateComponentPublicInstanceWithMixins<Readonly<{
             title?: string;
@@ -159,9 +167,9 @@ declare const _default: {
         color: string;
         text: string | number;
         href: string;
-        date: string | number | Date;
         mode: "text" | "link" | "phone" | "date" | "timeago" | "price";
         phoneNumber: string;
+        date: string | number | Date;
         dateFormat: string;
     }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, SVGViewElement>;
     SeeLink: import('vue').DefineComponent<{

@@ -1,6 +1,8 @@
-import { defineComponent as _, getCurrentInstance as E, ref as v, computed as b, createElementBlock as m, openBlock as p, normalizeClass as d, normalizeStyle as f, createElementVNode as C, createCommentVNode as g, renderSlot as H, toDisplayString as x, nextTick as D, createBlock as I, unref as k } from "vue";
-const W = ["hover-class", "disabled"], z = /* @__PURE__ */ _({
-  __name: "index",
+import { defineComponent as w, getCurrentInstance as W, ref as b, computed as y, createElementBlock as m, openBlock as p, normalizeClass as d, normalizeStyle as f, createElementVNode as C, createCommentVNode as v, renderSlot as z, toDisplayString as x, nextTick as D, unref as _, onMounted as F, onUnmounted as L, toValue as P, createBlock as O } from "vue";
+const U = ["hover-class", "disabled"], X = {
+  name: "SeeButton"
+}, j = /* @__PURE__ */ w({
+  ...X,
   props: {
     title: { default: "" },
     size: { default: "normal" },
@@ -22,87 +24,89 @@ const W = ["hover-class", "disabled"], z = /* @__PURE__ */ _({
   emits: ["onTap"],
   setup(n, { emit: l }) {
     let e = 0;
-    const o = E(), t = n;
+    const t = W(), o = n;
     e++;
-    const s = v(0), u = v(0), i = v(!1), h = v({}), w = "seeButton_" + e;
-    let R = 0;
-    const M = v([]), N = b(() => t.isRipple ? "none" : t.hoverClass ? t.hoverClass : t.isHollow ? `button-hover-${t.type}-hollow` : `button-hover-${t.type}`), $ = (a) => {
-      i.value = !1, D(() => Y(a));
-    }, Y = (a) => {
-      B().then((r) => {
+    const s = b(0), u = b(0), i = b(!1), h = b({}), k = "seeButton_" + e;
+    let N = 0;
+    const H = b([]), I = y(() => o.isRipple ? "none" : o.hoverClass ? o.hoverClass : o.isHollow ? `button-hover-${o.type}-hollow` : `button-hover-${o.type}`), R = (a) => {
+      i.value = !1, D(() => B(a));
+    }, B = (a) => {
+      E().then((r) => {
         if (!r?.height || (r.finalWidth = r.height > r.width ? r.height : r.width, !r.finalWidth)) return;
         h.value = r;
-        let c, y;
-        c = a.changedTouches[0].clientX, y = a.changedTouches[0].clientY, c = a.detail.clientX, y = a.detail.clientY, c = a.touches[0].clientX, y = a.touches[0].clientY, s.value = y - r.top - r.finalWidth / 2, u.value = c - r.left - r.finalWidth / 2, D(() => i.value = !0), M.value.push({
-          id: R++,
+        let c, g;
+        c = a.changedTouches[0].clientX, g = a.changedTouches[0].clientY, c = a.detail.clientX, g = a.detail.clientY, c = a.touches[0].clientX, g = a.touches[0].clientY, s.value = g - r.top - r.finalWidth / 2, u.value = c - r.left - r.finalWidth / 2, D(() => i.value = !0), H.value.push({
+          id: N++,
           x: c - r.left - r.finalWidth / 2,
-          y: y - r.top - r.finalWidth / 2,
+          y: g - r.top - r.finalWidth / 2,
           size: r.finalWidth
         });
       });
-    }, B = () => new Promise((a) => {
-      const r = uni.createSelectorQuery().in(o), c = "#" + w;
-      r.select(c).boundingClientRect((y) => {
-        a(y);
+    }, E = () => new Promise((a) => {
+      const r = uni.createSelectorQuery().in(t), c = "#" + k;
+      r.select(c).boundingClientRect((g) => {
+        a(g);
       }).exec();
     });
     return (a, r) => (p(), m("view", {
-      id: w,
-      style: f({ ...t.customStyle, borderRadius: t.radius + "px" }),
-      class: d(["see-button", [t.size]]),
-      onClick: r[1] || (r[1] = (c) => $(c))
+      id: k,
+      style: f({ ...o.customStyle, borderRadius: o.radius + "px" }),
+      class: d(["see-button", [o.size]]),
+      onClick: r[1] || (r[1] = (c) => R(c))
     }, [
       C("view", {
-        id: w,
-        style: f({ ...t.customStyle, borderRadius: t.radius + "px" }),
-        class: d(["see-button", [t.size]]),
-        onTouchstart: r[0] || (r[0] = (c) => $(c))
+        id: k,
+        style: f({ ...o.customStyle, borderRadius: o.radius + "px" }),
+        class: d(["see-button", [o.size]]),
+        onTouchstart: r[0] || (r[0] = (c) => R(c))
       }, [
         C("button", {
           style: f({
-            ...t.customStyle,
-            borderRadius: t.radius + "px",
-            background: t.color
+            ...o.customStyle,
+            borderRadius: o.radius + "px",
+            background: o.color
           }),
           class: d(["see-botton-class", [
-            t.size,
-            t.isDisabled && `disabled-${t.type}`,
-            t.isHollow ? `hollow-${t.type}` : t.type,
-            `border-${t.type}-${t.border ?? 1}`
+            o.size,
+            o.isDisabled && `disabled-${o.type}`,
+            o.isHollow ? `hollow-${o.type}` : o.type,
+            `border-${o.type}-${o.border ?? 1}`
           ]]),
-          "hover-class": N.value,
-          disabled: t.isDisabled
+          "hover-class": I.value,
+          disabled: o.isDisabled
         }, [
           C("text", {
-            style: f({ color: t.textColor }),
+            style: f({ color: o.textColor }),
             class: "title"
-          }, x(t.title), 5),
-          H(a.$slots, "default", {}, void 0, !0)
-        ], 14, W),
-        t.isRipple ? (p(), m("view", {
+          }, x(o.title), 5),
+          z(a.$slots, "default", {}, void 0, !0)
+        ], 14, U),
+        o.isRipple ? (p(), m("view", {
           key: 0,
           class: d(["see-button-ripple", { active: i.value }]),
           style: f({
-            ...t.rippleStyle,
+            ...o.rippleStyle,
             top: s.value + "px",
             left: u.value + "px",
             width: h.value.finalWidth + "px",
             height: h.value.finalWidth + "px",
             "background-color": n.rippleColor,
-            "--ripple-time": t.rippleTime + "ms",
-            "--mask-time": t.maskTime + "ms"
+            "--ripple-time": o.rippleTime + "ms",
+            "--mask-time": o.maskTime + "ms"
           })
-        }, null, 6)) : g("", !0)
+        }, null, 6)) : v("", !0)
       ], 38)
     ], 6));
   }
 }), S = (n, l) => {
   const e = n.__vccOpts || n;
-  for (const [o, t] of l)
-    e[o] = t;
+  for (const [t, o] of l)
+    e[t] = o;
   return e;
-}, F = /* @__PURE__ */ S(z, [["__scopeId", "data-v-4ae6dd2e"]]), L = /* @__PURE__ */ _({
-  __name: "index",
+}, q = /* @__PURE__ */ S(j, [["__scopeId", "data-v-8ca01f32"]]), A = {
+  name: "SeeLink"
+}, V = /* @__PURE__ */ w({
+  ...A,
   props: {
     text: { default: "" },
     type: { default: "info" },
@@ -113,14 +117,14 @@ const W = ["hover-class", "disabled"], z = /* @__PURE__ */ _({
   },
   emits: ["onClick"],
   setup(n, { emit: l }) {
-    const e = n, o = l, t = b(() => {
+    const e = n, t = l, o = y(() => {
       const i = [];
       return e.color || i.push(e.type), e.isLine && i.push("href"), i.join(" ");
-    }), s = b(() => {
+    }), s = y(() => {
       const i = {};
       return e.color && (i.color = e.color), e.isLine && e.lineColor && (i.borderBottomColor = e.lineColor), i;
     }), u = () => {
-      o("onClick"), (e.href ?? "") && (plus.runtime.openURL(e.href), window.open(e.href), uni.setClipboardData({
+      t("onClick"), (e.href ?? "") && (plus.runtime.openURL(e.href), window.open(e.href), uni.setClipboardData({
         data: e.href,
         success: () => {
           uni.hideToast(), D(() => {
@@ -133,13 +137,13 @@ const W = ["hover-class", "disabled"], z = /* @__PURE__ */ _({
       }));
     };
     return (i, h) => (p(), m("text", {
-      class: d(t.value),
+      class: d(o.value),
       style: f(s.value),
       onClick: u
     }, x(e.text), 7));
   }
-}), T = /* @__PURE__ */ S(L, [["__scopeId", "data-v-a55d9e3c"]]);
-function P(n) {
+}), Y = /* @__PURE__ */ S(V, [["__scopeId", "data-v-e96ac451"]]);
+function Q(n) {
   if (n == null) return null;
   if (n instanceof Date) return n;
   if (typeof n == "number") return new Date(n);
@@ -151,41 +155,41 @@ function P(n) {
   }
   return null;
 }
-function X(n, l = "YYYY-MM-DD HH:mm:ss", e = { placeholder: "" }) {
-  const o = P(n);
-  if (!o || isNaN(o.getTime()))
+function T(n, l = "YYYY-MM-DD HH:mm:ss", e = { placeholder: "" }) {
+  const t = Q(n);
+  if (!t || isNaN(t.getTime()))
     return e.placeholder || "";
-  const t = {
-    "M+": o.getMonth() + 1,
+  const o = {
+    "M+": t.getMonth() + 1,
     // 月份
-    "D+": o.getDate(),
+    "D+": t.getDate(),
     // 日
-    "H+": o.getHours(),
+    "H+": t.getHours(),
     // 小时 (24小时制)
-    "h+": o.getHours() % 12 === 0 ? 12 : o.getHours() % 12,
+    "h+": t.getHours() % 12 === 0 ? 12 : t.getHours() % 12,
     // 小时 (12小时制)
-    "m+": o.getMinutes(),
+    "m+": t.getMinutes(),
     // 分
-    "s+": o.getSeconds(),
+    "s+": t.getSeconds(),
     // 秒
-    "q+": Math.floor((o.getMonth() + 3) / 3),
+    "q+": Math.floor((t.getMonth() + 3) / 3),
     // 季度
-    "S+": o.getMilliseconds()
+    "S+": t.getMilliseconds()
     // 毫秒
   };
   if (/(Y+|y+)/.test(l) && (l = l.replace(
     RegExp.$1,
-    (o.getFullYear() + "").substr(4 - RegExp.$1.length)
+    (t.getFullYear() + "").substr(4 - RegExp.$1.length)
   )), /(W+)/.test(l)) {
     const s = ["日", "一", "二", "三", "四", "五", "六"];
     l = l.replace(
       RegExp.$1,
-      (RegExp.$1.length > 1 ? RegExp.$1.length > 2 ? "星期" : "周" : "") + s[o.getDay()]
+      (RegExp.$1.length > 1 ? RegExp.$1.length > 2 ? "星期" : "周" : "") + s[t.getDay()]
     );
   }
-  for (const s in t)
+  for (const s in o)
     if (new RegExp("(" + s + ")").test(l)) {
-      const u = t[s].toString();
+      const u = o[s].toString();
       s === "S+" ? l = l.replace(RegExp.$1, ("000" + u).slice(-3)) : l = l.replace(
         RegExp.$1,
         RegExp.$1.length === 1 ? u : ("00" + u).substr(("" + u).length)
@@ -193,37 +197,64 @@ function X(n, l = "YYYY-MM-DD HH:mm:ss", e = { placeholder: "" }) {
     }
   return l;
 }
-function q(n) {
+function G(n, l = "YYYY-MM-DD HH:mm:ss", e = { placeholder: "" }) {
+  return y(() => T(_(n), _(l), e));
+}
+function J(n) {
   return n ? n instanceof Date ? n : typeof n == "number" ? new Date(n) : typeof n == "string" ? /^\d+$/.test(n) ? new Date(parseInt(n)) : new Date(n.replace(/-/g, "/")) : null : null;
 }
-function U(n) {
-  const l = q(n);
+function $(n) {
+  const l = J(n);
   if (!l) return "";
-  const o = (Date.now() - l.getTime()) / 1e3;
-  return o < 0 ? "刚刚" : o < 60 ? Math.floor(o) + "秒前" : o < 3600 ? Math.floor(o / 60) + "分钟前" : o < 3600 * 24 ? Math.floor(o / 3600) + "小时前" : o < 3600 * 24 * 7 ? Math.floor(o / (3600 * 24)) + "天前" : o < 3600 * 24 * 30 ? Math.floor(o / (3600 * 24 * 7)) + "周前" : o < 3600 * 24 * 365 ? Math.floor(o / (3600 * 24 * 30)) + "月前" : Math.floor(o / (3600 * 24 * 365)) + "年前";
+  const t = (Date.now() - l.getTime()) / 1e3;
+  return t < 0 ? "刚刚" : t < 60 ? Math.floor(t) + "秒前" : t < 3600 ? Math.floor(t / 60) + "分钟前" : t < 3600 * 24 ? Math.floor(t / 3600) + "小时前" : t < 3600 * 24 * 7 ? Math.floor(t / (3600 * 24)) + "天前" : t < 3600 * 24 * 30 ? Math.floor(t / (3600 * 24 * 7)) + "周前" : t < 3600 * 24 * 365 ? Math.floor(t / (3600 * 24 * 30)) + "月前" : Math.floor(t / (3600 * 24 * 365)) + "年前";
 }
-function A(n, l) {
-  const e = n.toString(), o = e.indexOf(".");
-  if (o === -1)
+function K(n, l = 3e4) {
+  const e = b(0);
+  let t = null;
+  const o = () => {
+    s(), t = setInterval(() => {
+      e.value++;
+    }, l);
+  }, s = () => {
+    t && (clearInterval(t), t = null);
+  };
+  return F(() => o()), L(() => s()), y(() => (e.value, $(_(n))));
+}
+function Z(n, l) {
+  const e = n.toString(), t = e.indexOf(".");
+  if (t === -1)
     return Number(e);
-  const t = e.substring(0, o + 1 + l);
-  return Number(t);
+  const o = e.substring(0, t + 1 + l);
+  return Number(o);
 }
-function O(n, l = {}) {
-  const { decimals: e = 2, symbol: o = "", useGrouping: t = !0 } = l, s = Number(n);
+function M(n, l = {}) {
+  const { decimals: e = 2, symbol: t = "", useGrouping: o = !0 } = l, s = Number(n);
   if (Number.isNaN(s)) return "";
-  const u = A(s, e), h = new Intl.NumberFormat("en-US", {
+  const u = Z(s, e), h = new Intl.NumberFormat("en-US", {
     style: "decimal",
     minimumFractionDigits: e,
     maximumFractionDigits: e,
-    useGrouping: t
+    useGrouping: o
     // 注意：不依赖 Intl 的 roundingMode，因为兼容性还不是 100% 全覆盖，
     // 手动截断最稳妥。
   }).format(u);
-  return o ? `${o}${h}` : h;
+  return t ? `${t}${h}` : h;
 }
-const Q = /* @__PURE__ */ _({
-  __name: "index",
+function ee(n, l = {}) {
+  const { placeholder: e = "-" } = l;
+  return y(() => {
+    const t = P(n);
+    if (t == null || t === "")
+      return e;
+    const o = M(t, l);
+    return o === "" ? e : o;
+  });
+}
+const te = {
+  name: "SeeText"
+}, oe = /* @__PURE__ */ w({
+  ...te,
   props: {
     text: { default: "" },
     type: { default: "info" },
@@ -236,10 +267,10 @@ const Q = /* @__PURE__ */ _({
   },
   emits: ["onClick"],
   setup(n, { emit: l }) {
-    const e = n, o = l, t = b(() => e.color ? "" : e.type), s = b(() => ({
+    const e = n, t = l, o = y(() => e.color ? "" : e.type), s = y(() => ({
       color: e.color
     })), u = () => {
-      o("onClick"), e.mode === "phone" && (uni.makePhoneCall({
+      t("onClick"), e.mode === "phone" && (uni.makePhoneCall({
         phoneNumber: e.phoneNumber
       }), uni.showToast({
         title: "H5不支持，请使用小程序或APP点击",
@@ -252,45 +283,60 @@ const Q = /* @__PURE__ */ _({
     }, [
       e.mode === "text" ? (p(), m("text", {
         key: 0,
-        class: d(t.value),
+        class: d(o.value),
         style: f(s.value)
-      }, x(e.text), 7)) : g("", !0),
-      e.mode === "link" ? (p(), I(T, {
+      }, x(e.text), 7)) : v("", !0),
+      e.mode === "link" ? (p(), O(Y, {
         key: 1,
         text: e.text,
         type: e.type,
         href: e.href
-      }, null, 8, ["text", "type", "href"])) : g("", !0),
+      }, null, 8, ["text", "type", "href"])) : v("", !0),
       e.mode === "phone" ? (p(), m("text", {
         key: 2,
-        class: d(t.value),
+        class: d(o.value),
         style: f(s.value)
-      }, x(e.text), 7)) : g("", !0),
+      }, x(e.text), 7)) : v("", !0),
       e.mode === "price" ? (p(), m("text", {
         key: 3,
-        class: d(t.value),
+        class: d(o.value),
         style: f(s.value)
-      }, x(k(O)(e.text)), 7)) : g("", !0),
+      }, x(_(M)(e.text)), 7)) : v("", !0),
       e.mode === "date" ? (p(), m("text", {
         key: 4,
-        class: d(t.value),
+        class: d(o.value),
         style: f(s.value)
-      }, x(k(X)(e.date, e.dateFormat)), 7)) : g("", !0),
+      }, x(_(T)(e.date, e.dateFormat)), 7)) : v("", !0),
       e.mode === "timeago" ? (p(), m("text", {
         key: 5,
-        class: d(t.value),
+        class: d(o.value),
         style: f(s.value)
-      }, x(k(U)(e.date)), 7)) : g("", !0)
+      }, x(_($)(e.date)), 7)) : v("", !0)
     ]));
   }
-}), V = /* @__PURE__ */ S(Q, [["__scopeId", "data-v-468bf5b5"]]), G = {
-  SeeButton: F,
-  SeeText: V,
-  SeeLink: T
+}), ne = /* @__PURE__ */ S(oe, [["__scopeId", "data-v-070997d1"]]), le = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  formatCurrency: M,
+  formatDate: T,
+  formatTimeAgo: $,
+  useCurrencyFormat: ee,
+  useDateFormat: G,
+  useTimeAgo: K
+}, Symbol.toStringTag, { value: "Module" })), se = {
+  SeeButton: q,
+  SeeText: ne,
+  SeeLink: Y,
+  ...le
 };
 export {
-  F as SeeButton,
-  T as SeeLink,
-  V as SeeText,
-  G as default
+  q as SeeButton,
+  Y as SeeLink,
+  ne as SeeText,
+  se as default,
+  M as formatCurrency,
+  T as formatDate,
+  $ as formatTimeAgo,
+  ee as useCurrencyFormat,
+  G as useDateFormat,
+  K as useTimeAgo
 };
