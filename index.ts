@@ -6,7 +6,6 @@ import { SeeLink } from "./components/SeeLink/index";
 import * as hooks from "./utils/hooks/index";
 
 export { SeeButton, SeeText, SeeLink };
-export * from "./utils/hooks/index";
 
 export default {
   SeeButton,
