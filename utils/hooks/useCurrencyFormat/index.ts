@@ -1,4 +1,9 @@
-import { computed, unref, type ComputedRef, type MaybeRefOrGetter } from "vue";
+import {
+  computed,
+  toValue,
+  type ComputedRef,
+  type MaybeRefOrGetter,
+} from "vue";
 
 type NumberInput = MaybeRefOrGetter<number | string | null | undefined>;
 
@@ -72,7 +77,7 @@ export function useCurrencyFormat(
   const { placeholder = "-" } = options;
 
   return computed(() => {
-    const val = unref(amount);
+    const val = toValue(amount);
 
     if (val === null || val === undefined || val === "") {
       return placeholder;
