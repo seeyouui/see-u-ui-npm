@@ -1,8 +1,8 @@
-import { defineComponent as w, getCurrentInstance as W, ref as b, computed as y, createElementBlock as m, openBlock as p, normalizeClass as d, normalizeStyle as f, createElementVNode as C, createCommentVNode as v, renderSlot as z, toDisplayString as x, nextTick as D, unref as _, onMounted as F, onUnmounted as L, toValue as P, createBlock as O } from "vue";
-const U = ["hover-class", "disabled"], X = {
+import { defineComponent as w, getCurrentInstance as F, ref as b, computed as g, createElementBlock as m, openBlock as p, normalizeClass as d, normalizeStyle as f, createElementVNode as C, createCommentVNode as v, renderSlot as L, toDisplayString as x, nextTick as D, unref as _, onMounted as O, onUnmounted as P, toValue as j, createBlock as U } from "vue";
+const X = ["hover-class", "disabled"], q = {
   name: "SeeButton"
-}, j = /* @__PURE__ */ w({
-  ...X,
+}, A = /* @__PURE__ */ w({
+  ...q,
   props: {
     title: { default: "" },
     size: { default: "normal" },
@@ -24,41 +24,41 @@ const U = ["hover-class", "disabled"], X = {
   emits: ["onTap"],
   setup(n, { emit: l }) {
     let e = 0;
-    const t = W(), o = n;
+    const t = F(), o = n;
     e++;
     const s = b(0), u = b(0), i = b(!1), h = b({}), k = "seeButton_" + e;
-    let N = 0;
-    const H = b([]), I = y(() => o.isRipple ? "none" : o.hoverClass ? o.hoverClass : o.isHollow ? `button-hover-${o.type}-hollow` : `button-hover-${o.type}`), R = (a) => {
-      i.value = !1, D(() => B(a));
-    }, B = (a) => {
-      E().then((r) => {
+    let I = 0;
+    const B = b([]), E = g(() => o.isRipple ? "none" : o.hoverClass ? o.hoverClass : o.isHollow ? `button-hover-${o.type}-hollow` : `button-hover-${o.type}`), Y = (a) => {
+      i.value = !1, D(() => W(a));
+    }, W = (a) => {
+      z().then((r) => {
         if (!r?.height || (r.finalWidth = r.height > r.width ? r.height : r.width, !r.finalWidth)) return;
         h.value = r;
-        let c, g;
-        c = a.changedTouches[0].clientX, g = a.changedTouches[0].clientY, c = a.detail.clientX, g = a.detail.clientY, c = a.touches[0].clientX, g = a.touches[0].clientY, s.value = g - r.top - r.finalWidth / 2, u.value = c - r.left - r.finalWidth / 2, D(() => i.value = !0), H.value.push({
-          id: N++,
+        let c, y;
+        c = a.changedTouches[0].clientX, y = a.changedTouches[0].clientY, c = a.detail.clientX, y = a.detail.clientY, c = a.touches[0].clientX, y = a.touches[0].clientY, s.value = y - r.top - r.finalWidth / 2, u.value = c - r.left - r.finalWidth / 2, D(() => i.value = !0), B.value.push({
+          id: I++,
           x: c - r.left - r.finalWidth / 2,
-          y: g - r.top - r.finalWidth / 2,
+          y: y - r.top - r.finalWidth / 2,
           size: r.finalWidth
         });
       });
-    }, E = () => new Promise((a) => {
+    }, z = () => new Promise((a) => {
       const r = uni.createSelectorQuery().in(t), c = "#" + k;
-      r.select(c).boundingClientRect((g) => {
-        a(g);
+      r.select(c).boundingClientRect((y) => {
+        a(y);
       }).exec();
     });
     return (a, r) => (p(), m("view", {
       id: k,
       style: f({ ...o.customStyle, borderRadius: o.radius + "px" }),
       class: d(["see-button", [o.size]]),
-      onClick: r[1] || (r[1] = (c) => R(c))
+      onClick: r[1] || (r[1] = (c) => Y(c))
     }, [
       C("view", {
         id: k,
         style: f({ ...o.customStyle, borderRadius: o.radius + "px" }),
         class: d(["see-button", [o.size]]),
-        onTouchstart: r[0] || (r[0] = (c) => R(c))
+        onTouchstart: r[0] || (r[0] = (c) => Y(c))
       }, [
         C("button", {
           style: f({
@@ -72,15 +72,15 @@ const U = ["hover-class", "disabled"], X = {
             o.isHollow ? `hollow-${o.type}` : o.type,
             `border-${o.type}-${o.border ?? 1}`
           ]]),
-          "hover-class": I.value,
+          "hover-class": E.value,
           disabled: o.isDisabled
         }, [
           C("text", {
             style: f({ color: o.textColor }),
             class: "title"
           }, x(o.title), 5),
-          z(a.$slots, "default", {}, void 0, !0)
-        ], 14, U),
+          L(a.$slots, "default", {}, void 0, !0)
+        ], 14, X),
         o.isRipple ? (p(), m("view", {
           key: 0,
           class: d(["see-button-ripple", { active: i.value }]),
@@ -103,10 +103,10 @@ const U = ["hover-class", "disabled"], X = {
   for (const [t, o] of l)
     e[t] = o;
   return e;
-}, q = /* @__PURE__ */ S(j, [["__scopeId", "data-v-8ca01f32"]]), A = {
+}, N = /* @__PURE__ */ S(A, [["__scopeId", "data-v-8ca01f32"]]), V = {
   name: "SeeLink"
-}, V = /* @__PURE__ */ w({
-  ...A,
+}, Q = /* @__PURE__ */ w({
+  ...V,
   props: {
     text: { default: "" },
     type: { default: "info" },
@@ -117,10 +117,10 @@ const U = ["hover-class", "disabled"], X = {
   },
   emits: ["onClick"],
   setup(n, { emit: l }) {
-    const e = n, t = l, o = y(() => {
+    const e = n, t = l, o = g(() => {
       const i = [];
       return e.color || i.push(e.type), e.isLine && i.push("href"), i.join(" ");
-    }), s = y(() => {
+    }), s = g(() => {
       const i = {};
       return e.color && (i.color = e.color), e.isLine && e.lineColor && (i.borderBottomColor = e.lineColor), i;
     }), u = () => {
@@ -142,8 +142,8 @@ const U = ["hover-class", "disabled"], X = {
       onClick: u
     }, x(e.text), 7));
   }
-}), Y = /* @__PURE__ */ S(V, [["__scopeId", "data-v-e96ac451"]]);
-function Q(n) {
+}), T = /* @__PURE__ */ S(Q, [["__scopeId", "data-v-e96ac451"]]);
+function G(n) {
   if (n == null) return null;
   if (n instanceof Date) return n;
   if (typeof n == "number") return new Date(n);
@@ -155,8 +155,8 @@ function Q(n) {
   }
   return null;
 }
-function T(n, l = "YYYY-MM-DD HH:mm:ss", e = { placeholder: "" }) {
-  const t = Q(n);
+function $(n, l = "YYYY-MM-DD HH:mm:ss", e = { placeholder: "" }) {
+  const t = G(n);
   if (!t || isNaN(t.getTime()))
     return e.placeholder || "";
   const o = {
@@ -197,19 +197,19 @@ function T(n, l = "YYYY-MM-DD HH:mm:ss", e = { placeholder: "" }) {
     }
   return l;
 }
-function G(n, l = "YYYY-MM-DD HH:mm:ss", e = { placeholder: "" }) {
-  return y(() => T(_(n), _(l), e));
+function J(n, l = "YYYY-MM-DD HH:mm:ss", e = { placeholder: "" }) {
+  return g(() => $(_(n), _(l), e));
 }
-function J(n) {
+function K(n) {
   return n ? n instanceof Date ? n : typeof n == "number" ? new Date(n) : typeof n == "string" ? /^\d+$/.test(n) ? new Date(parseInt(n)) : new Date(n.replace(/-/g, "/")) : null : null;
 }
-function $(n) {
-  const l = J(n);
+function M(n) {
+  const l = K(n);
   if (!l) return "";
   const t = (Date.now() - l.getTime()) / 1e3;
   return t < 0 ? "刚刚" : t < 60 ? Math.floor(t) + "秒前" : t < 3600 ? Math.floor(t / 60) + "分钟前" : t < 3600 * 24 ? Math.floor(t / 3600) + "小时前" : t < 3600 * 24 * 7 ? Math.floor(t / (3600 * 24)) + "天前" : t < 3600 * 24 * 30 ? Math.floor(t / (3600 * 24 * 7)) + "周前" : t < 3600 * 24 * 365 ? Math.floor(t / (3600 * 24 * 30)) + "月前" : Math.floor(t / (3600 * 24 * 365)) + "年前";
 }
-function K(n, l = 3e4) {
+function Z(n, l = 3e4) {
   const e = b(0);
   let t = null;
   const o = () => {
@@ -219,19 +219,19 @@ function K(n, l = 3e4) {
   }, s = () => {
     t && (clearInterval(t), t = null);
   };
-  return F(() => o()), L(() => s()), y(() => (e.value, $(_(n))));
+  return O(() => o()), P(() => s()), g(() => (e.value, M(_(n))));
 }
-function Z(n, l) {
+function ee(n, l) {
   const e = n.toString(), t = e.indexOf(".");
   if (t === -1)
     return Number(e);
   const o = e.substring(0, t + 1 + l);
   return Number(o);
 }
-function M(n, l = {}) {
+function R(n, l = {}) {
   const { decimals: e = 2, symbol: t = "", useGrouping: o = !0 } = l, s = Number(n);
   if (Number.isNaN(s)) return "";
-  const u = Z(s, e), h = new Intl.NumberFormat("en-US", {
+  const u = ee(s, e), h = new Intl.NumberFormat("en-US", {
     style: "decimal",
     minimumFractionDigits: e,
     maximumFractionDigits: e,
@@ -241,20 +241,20 @@ function M(n, l = {}) {
   }).format(u);
   return t ? `${t}${h}` : h;
 }
-function ee(n, l = {}) {
+function te(n, l = {}) {
   const { placeholder: e = "-" } = l;
-  return y(() => {
-    const t = P(n);
+  return g(() => {
+    const t = j(n);
     if (t == null || t === "")
       return e;
-    const o = M(t, l);
+    const o = R(t, l);
     return o === "" ? e : o;
   });
 }
-const te = {
+const oe = {
   name: "SeeText"
-}, oe = /* @__PURE__ */ w({
-  ...te,
+}, ne = /* @__PURE__ */ w({
+  ...oe,
   props: {
     text: { default: "" },
     type: { default: "info" },
@@ -267,7 +267,7 @@ const te = {
   },
   emits: ["onClick"],
   setup(n, { emit: l }) {
-    const e = n, t = l, o = y(() => e.color ? "" : e.type), s = y(() => ({
+    const e = n, t = l, o = g(() => e.color ? "" : e.type), s = g(() => ({
       color: e.color
     })), u = () => {
       t("onClick"), e.mode === "phone" && (uni.makePhoneCall({
@@ -286,7 +286,7 @@ const te = {
         class: d(o.value),
         style: f(s.value)
       }, x(e.text), 7)) : v("", !0),
-      e.mode === "link" ? (p(), O(Y, {
+      e.mode === "link" ? (p(), U(T, {
         key: 1,
         text: e.text,
         type: e.type,
@@ -301,36 +301,49 @@ const te = {
         key: 3,
         class: d(o.value),
         style: f(s.value)
-      }, x(_(M)(e.text)), 7)) : v("", !0),
+      }, x(_(R)(e.text)), 7)) : v("", !0),
       e.mode === "date" ? (p(), m("text", {
         key: 4,
         class: d(o.value),
         style: f(s.value)
-      }, x(_(T)(e.date, e.dateFormat)), 7)) : v("", !0),
+      }, x(_($)(e.date, e.dateFormat)), 7)) : v("", !0),
       e.mode === "timeago" ? (p(), m("text", {
         key: 5,
         class: d(o.value),
         style: f(s.value)
-      }, x(_($)(e.date)), 7)) : v("", !0)
+      }, x(_(M)(e.date)), 7)) : v("", !0)
     ]));
   }
-}), ne = /* @__PURE__ */ S(oe, [["__scopeId", "data-v-070997d1"]]), le = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+}), H = /* @__PURE__ */ S(ne, [["__scopeId", "data-v-070997d1"]]), le = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  formatCurrency: M,
-  formatDate: T,
-  formatTimeAgo: $,
-  useCurrencyFormat: ee,
-  useDateFormat: G,
-  useTimeAgo: K
-}, Symbol.toStringTag, { value: "Module" })), se = {
-  SeeButton: q,
-  SeeText: ne,
-  SeeLink: Y,
-  ...le
-};
+  formatCurrency: R,
+  formatDate: $,
+  formatTimeAgo: M,
+  useCurrencyFormat: te,
+  useDateFormat: J,
+  useTimeAgo: Z
+}, Symbol.toStringTag, { value: "Module" })), re = [N, H, T], se = (n) => {
+  re.forEach((l) => {
+    l.name && n.component(l.name, l);
+  });
+}, ue = Object.assign(
+  {
+    install: se,
+    SeeButton: N,
+    SeeText: H,
+    SeeLink: T
+  },
+  le
+);
 export {
-  q as SeeButton,
-  Y as SeeLink,
-  ne as SeeText,
-  se as default
+  N as SeeButton,
+  T as SeeLink,
+  H as SeeText,
+  ue as default,
+  R as formatCurrency,
+  $ as formatDate,
+  M as formatTimeAgo,
+  te as useCurrencyFormat,
+  J as useDateFormat,
+  Z as useTimeAgo
 };

@@ -3,13 +3,9 @@ import { SeeText } from './components/SeeText/index';
 import { SeeLink } from './components/SeeLink/index';
 import * as hooks from "./utils/hooks/index";
 export { SeeButton, SeeText, SeeLink };
+export * from './utils/hooks/index';
 declare const _default: {
-    formatCurrency(value: number | string, options?: hooks.CurrencyOptions): string;
-    useCurrencyFormat(amount: import('vue').MaybeRef<string | number> | import('vue').ComputedRef<string | number> | (() => string | number), options?: hooks.CurrencyOptions): import('vue').ComputedRef<string>;
-    formatDate(date: string | number | Date, fmt?: string, options?: hooks.DateFormatOptions): string;
-    useDateFormat(date: import('vue').MaybeRef<string | number | Date>, formatStr?: import('vue').MaybeRef<string>, options?: hooks.DateFormatOptions): import('vue').ComputedRef<string>;
-    formatTimeAgo(date: string | number | Date): string;
-    useTimeAgo(date: import('vue').MaybeRef<string | number | Date>, updateInterval?: number): import('vue').ComputedRef<string>;
+    install: (app: any) => void;
     SeeButton: {
         new (...args: any[]): import('vue').CreateComponentPublicInstanceWithMixins<Readonly<{
             title?: string;
@@ -197,5 +193,5 @@ declare const _default: {
         isLine: boolean;
         lineColor: string;
     }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, SVGTextElement>;
-};
+} & typeof hooks;
 export default _default;
