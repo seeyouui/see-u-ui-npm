@@ -3,7 +3,6 @@ import { SeeText } from './components/SeeText/index';
 import { SeeLink } from './components/SeeLink/index';
 import * as hooks from "./utils/hooks/index";
 export { SeeButton, SeeText, SeeLink };
-export * from './utils/hooks/index';
 declare const _default: {
     formatCurrency(value: number | string, options?: hooks.CurrencyOptions): string;
     useCurrencyFormat(amount: import('vue').MaybeRef<string | number> | import('vue').ComputedRef<string | number> | (() => string | number), options?: hooks.CurrencyOptions): import('vue').ComputedRef<string>;
