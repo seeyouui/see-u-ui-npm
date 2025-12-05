@@ -1,6 +1,6 @@
 {
   "name": "see-u-ui",
-  "version": "1.0.008-alpha3",
+  "version": "1.0.008-alpha4",
   "description": "SeeYouUI，是全面兼容nvue的uni-app生态框架",
   "license": "MIT",
   "author": "GmhLovEDM",
@@ -8,7 +8,7 @@
   "main": "index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "build": "vue-tsc --declaration --emitDeclarationOnly --outDir dist/types"
+    "build": "vue-tsc --declaration --outDir dist/types"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
