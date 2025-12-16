@@ -1,14 +1,19 @@
 <template>
 	<view class="see-text" @click="onClick">
 		<!-- 普通文本 -->
-		<text v-if="props.mode === 'text' && !props.isCountUp" :class="getClass" :style="getStyle">
+		<text v-if="props.mode === 'text' && !props.isCountUp && !props.isTextUp" :class="getClass" :style="getStyle">
 			{{ props.text }}
+		</text>
+
+		<!-- 文字打字机效果 -->
+		<text v-if="props.mode === 'text' && props.isTextUp" :class="getClass" :style="getStyle">
+			{{ textUpHook.displayText.value }}<text v-if="props.textUp.showCursor" class="cursor">|</text>
 		</text>
 
 		<!-- 数字滚动 -->
 		<view v-if="props.mode === 'text' && props.isCountUp" class="countup">
 			<view
-				v-for="(item, index) in renderList"
+				v-for="(item, index) in countUpHook.renderList.value"
 				:key="index"
 				class="digit"
 				:style="getStyle"
@@ -25,7 +30,7 @@
 						:class="{ animate: item.animate }"
 						:style="{
 							transform: `translateY(-${item.value}em)`,
-							transitionDuration: props.countUp.duration + 'ms'
+							transitionDuration: countUpHook.config.duration + 'ms'
 						}"
 					>
 						<text v-for="n in 10" :key="n" class="num">
@@ -52,7 +57,7 @@
 		<!-- 金额 + 数字滚动 -->
 		<view v-if="props.mode === 'price' && props.isCountUp" class="countup">
 			<view
-				v-for="(item, index) in renderList"
+				v-for="(item, index) in countUpHook.renderList.value"
 				:key="index"
 				class="digit"
 				:style="getStyle"
@@ -69,7 +74,7 @@
 						:class="{ animate: item.animate }"
 						:style="{
 							transform: `translateY(-${item.value}em)`,
-							transitionDuration: props.countUp.duration + 'ms'
+							transitionDuration: countUpHook.config.duration + 'ms'
 						}"
 					>
 						<text v-for="n in 10" :key="n" class="num">
@@ -107,8 +112,10 @@
  * @property {String | Number | Date}										date			日期（时间戳格式）
  * @property {String}														dateFormat		日期格式（默认'YYYY-MM-DD'）
  * @property {String | Number}												size			字体大小（px），默认16
- * @property {Number}														isCountUp		是否开启数字滚动
+ * @property {Boolean}														isCountUp		是否开启数字滚动
  * @property {Object}														countUp			数字滚动配置
+ * @property {Boolean}														isTextUp		是否开启文字打字机效果
+ * @property {Object}														textUp			文字打字机配置
  * @example
  */
 export default {
@@ -117,11 +124,13 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, watch, onBeforeUnmount } from 'vue';
+import { computed, watch } from 'vue';
 import SeeLink from '../see-link/see-link.vue';
 import { formatDate } from '../../utils/hooks/useDateFormat';
 import { formatTimeAgo } from '../../utils/hooks/useTimeAgo';
 import { formatCurrency } from '../../utils/hooks/useCurrencyFormat';
+import { useCountUp } from '../../utils/hooks/useCountUp';
+import { useTextUp } from '../../utils/hooks/useTextUp';
 
 /** ---------- props ---------- */
 const props = withDefaults(
@@ -142,6 +151,12 @@ const props = withDefaults(
 			decimals?: number;
 			thousand?: boolean;
 		};
+		isTextUp?: boolean;
+		textUp?: {
+			speed?: number;
+			showCursor?: boolean;
+			autoStart?: boolean;
+		};
 	}>(),
 	{
 		text: '',
@@ -159,6 +174,12 @@ const props = withDefaults(
 			animateDuration: 1000,
 			decimals: 2,
 			thousand: true
+		}),
+		isTextUp: false,
+		textUp: () => ({
+			speed: 100,
+			showCursor: true,
+			autoStart: true
 		})
 	}
 );
@@ -166,13 +187,11 @@ const props = withDefaults(
 /** ---------- emits ---------- */
 const emit = defineEmits<{
 	(e: 'onClick'): void;
+	(e: 'onTextUpComplete'): void;
+	(e: 'onTextUpTyping', currentText: string): void;
 }>();
 
-/** ---------- CountUp 相关 ---------- */
-const currentValue = ref(0);
-const renderList = ref<Array<{ type: string; value: number | string; animate: boolean }>>([]);
-const timer = ref<any>(null);
-
+/** ---------- 计算属性 ---------- */
 const getClass = computed(() => {
 	return props.color ? '' : props.type;
 });
@@ -184,104 +203,34 @@ const getStyle = computed(() => {
 	};
 });
 
-/** 启动递增动画 */
-const startCount = (target: number) => {
-	if (timer.value) {
-		clearInterval(timer.value);
-	}
+/** ---------- 初始化 Hooks ---------- */
+// CountUp Hook
+const countUpHook = useCountUp(props.countUp);
 
-	const start = currentValue.value || 0;
-	const end = target;
-	const frameTime = 16;
-	const steps = Math.max(1, Math.floor(props.countUp.animateDuration / frameTime));
-	const stepValue = (end - start) / steps;
+// TextUp Hook
+const textUpHook = useTextUp(props.textUp, {
+	onComplete: () => emit('onTextUpComplete'),
+	onTyping: (currentText) => emit('onTextUpTyping', currentText)
+});
 
-	let current = start;
-	let count = 0;
-
-	timer.value = setInterval(() => {
-		count++;
-		current += stepValue;
-
-		if (count >= steps) {
-			current = end;
-			clearInterval(timer.value);
-		}
-
-		currentValue.value = current;
-		updateRender(current);
-	}, frameTime);
-};
-
-/** 只更新变化的位 */
-const updateRender = (val: number) => {
-	let numStr = '';
-	
-	if (props.mode === 'price') {
-		numStr = formatCurrency(val);
-	} else {
-		numStr = Number(val).toFixed(props.countUp.decimals);
-		
-		if (props.countUp.thousand) {
-			const [intPart, decPart] = numStr.split('.');
-			numStr = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (decPart ? '.' + decPart : '');
-		}
-	}
-
-	const chars = numStr.split('');
-	const newList: Array<{ type: string; value: number | string; animate: boolean }> = [];
-
-	chars.forEach((ch, index) => {
-		const oldItem = renderList.value[index];
-
-		// 数字
-		if (/\d/.test(ch)) {
-			const newVal = Number(ch);
-
-			if (oldItem && oldItem.type === 'num' && oldItem.value === newVal) {
-				// 没变化：不动画
-				newList.push({
-					...oldItem,
-					animate: false
-				});
-			} else {
-				// 变化：才滚动
-				newList.push({
-					type: 'num',
-					value: newVal,
-					animate: true
-				});
-			}
-		} else {
-			// 非数字
-			newList.push({
-				type: 'char',
-				value: ch,
-				animate: false
-			});
-		}
-	});
-
-	renderList.value = newList;
-};
-
-/** 监听 text 变化 */
+/** ---------- 监听 ---------- */
+// 监听 text 变化 - CountUp
 watch(
 	() => props.text,
 	(val) => {
 		if (props.isCountUp && (props.mode === 'text' || props.mode === 'price')) {
-			startCount(Number(val));
+			countUpHook.startCount(Number(val), props.mode, formatCurrency);
+		}
+		
+		// 监听 text 变化 - TextUp
+		if (props.isTextUp && props.mode === 'text' && props.textUp.autoStart) {
+			textUpHook.startTyping(String(val));
 		}
 	},
 	{ immediate: true }
 );
 
-onBeforeUnmount(() => {
-	if (timer.value) {
-		clearInterval(timer.value);
-	}
-});
-
+/** ---------- 事件处理 ---------- */
 const onClick = () => {
 	emit('onClick');
 	if (props.mode === 'phone') {
@@ -299,6 +248,22 @@ const onClick = () => {
 		// #endif
 	}
 };
+
+/** ---------- 暴露方法 ---------- */
+defineExpose({
+	// 打字机方法
+	startTyping: (text?: string) => textUpHook.startTyping(text || String(props.text)),
+	stopTyping: textUpHook.stopTyping,
+	resetTyping: textUpHook.resetTyping,
+	showAllText: (text?: string) => textUpHook.showAllText(text || String(props.text)),
+	pauseTyping: textUpHook.pauseTyping,
+	resumeTyping: (text?: string) => textUpHook.resumeTyping(text || String(props.text)),
+	
+	// 计数方法
+	startCount: (target?: number) => countUpHook.startCount(target || Number(props.text), props.mode, formatCurrency),
+	stopCount: countUpHook.stopCount,
+	resetCount: countUpHook.resetCount
+});
 </script>
 
 <style lang="scss" scoped>
@@ -362,5 +327,20 @@ const onClick = () => {
 	height: 1em;
 	line-height: 1em;
 	text-align: center;
+}
+
+/* 打字机效果样式 */
+.cursor {
+	margin-left: 4rpx;
+	animation: blink 1s infinite;
+}
+
+@keyframes blink {
+	0%, 49% {
+		opacity: 1;
+	}
+	50%, 100% {
+		opacity: 0;
+	}
 }
 </style>
