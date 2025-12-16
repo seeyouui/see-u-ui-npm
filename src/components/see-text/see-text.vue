@@ -258,7 +258,10 @@ defineExpose({
 	resumeTyping: (text?: string) => textUpHook.resumeTyping(text || String(props.text)),
 	
 	// 计数方法
-	startCount: (target?: number) => countUpHook.startCount(target || Number(props.text), props.mode, formatCurrency),
+	startCount: (target?: number) => {
+		const mode = props.mode === 'price' ? 'price' : 'text';
+		countUpHook.startCount(target || Number(props.text), mode, formatCurrency);
+	},
 	stopCount: countUpHook.stopCount,
 	resetCount: countUpHook.resetCount
 });
