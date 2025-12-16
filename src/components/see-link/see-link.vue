@@ -2,7 +2,7 @@
 	<text :class="getClass" :style="getStyle" @click="onClick">{{ props.text }}</text>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 /**
  * Link 链接
  * @description 暂无说明
@@ -17,12 +17,11 @@
  * @property {String | Number}										size			字体大小（px），默认16
  * @example
  */
-export default {
-	name: 'SeeLink'
-};
-</script>
-<script lang="ts" setup>
 import { nextTick, computed } from 'vue';
+
+defineOptions({
+  name: 'SeeLink'
+});
 
 /** ---------- props ---------- */
 const props = withDefaults(

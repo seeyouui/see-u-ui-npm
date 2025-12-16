@@ -47,7 +47,7 @@
 	<!-- #endif -->
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 /**
  * Button 按钮
  * @description 此组件基于uniapp官方button，进行二次封装
@@ -71,13 +71,12 @@
  *
  * @example
  */
-export default {
-	name: 'SeeButton'
-};
-</script>
-<script lang="ts" setup>
 import { ref, computed, nextTick, getCurrentInstance } from 'vue';
 import type { TouchEvent, ClientRectData, RippleItem } from './type';
+
+defineOptions({
+  name: 'SeeButton'
+});
 
 let globalId = 0;
 const instance = getCurrentInstance();

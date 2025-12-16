@@ -97,7 +97,7 @@
 	</view>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 /**
  * Text 文本
  * @description 文本组件，此组件集成了文本类在项目中的常用功能，包括设置主题，拨打电话，格式化日期，显示金额，超链接...等功能。 您大可不必在使用特殊文本时自己定义，text 组件几乎涵盖您能使用的大部分场景。
@@ -118,12 +118,6 @@
  * @property {Object}														textUp			文字打字机配置
  * @example
  */
-export default {
-	name: 'SeeText'
-};
-</script>
-
-<script lang="ts" setup>
 import { computed, watch } from 'vue';
 import SeeLink from '../see-link/see-link.vue';
 import { formatDate } from '../../utils/hooks/useDateFormat';
@@ -131,6 +125,10 @@ import { formatTimeAgo } from '../../utils/hooks/useTimeAgo';
 import { formatCurrency } from '../../utils/hooks/useCurrencyFormat';
 import { useCountUp } from '../../utils/hooks/useCountUp';
 import { useTextUp } from '../../utils/hooks/useTextUp';
+
+defineOptions({
+  name: 'SeeText'
+});
 
 /** ---------- props ---------- */
 const props = withDefaults(

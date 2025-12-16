@@ -4,7 +4,7 @@
 	</view>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 /**
  * Icon 图标
  * @description 暂无说明
@@ -14,12 +14,9 @@
  *
  * @example
  */
-export default {
-	name: 'SeeIcon'
-};
-</script>
-<script lang="ts" setup>
-
+defineOptions({
+  name: 'SeeIcon'
+});
 </script>
 
 <style lang="scss" scoped>
